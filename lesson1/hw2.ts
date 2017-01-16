@@ -138,25 +138,37 @@ class Polygon extends Shape implements IPolygon{
 }
 
 
-let point1: Point = new Point(1, 2);
-let point2:Point = new Point(10, 3);
-let point3:Point = new Point(20, 5);
-let point4:Point = new Point(14, 11);
+const ShapeFactory = {
+    get random():number{
+        return Math.floor(Math.random()*10) +1
+    },
+    create(type:string){
+        let instance;
+        switch (type){
+            case "point":
+                instance = new Point(this.random, this.random);
+                break;
+            case "circle":
+                instance = new Circle(this.create('point'), this.random);
+                break;
+            case "rect":
+                instance = new Rect(this.create('point'), this.create('point'));
+                break;
+            case "polyline":
+                instance = new Polyline(this.create('point'), this.create('point'), this.create('point'));
+                break;
+            case "polygon":
+                instance = new Polygon(this.create('point'), this.create('point'), this.create('point'), this.create('point'));
+                break;
+        }
+        return instance;
+    }
+};
 
-let circle: Circle = new Circle(point1, 10);
-let rect:Rect = new Rect(point1, point2);
-let polyline:Polyline = new Polyline(point1, point2);
-let polygon:Polygon = new Polygon(point1, point2, point3, point4);
-
-point1.printDetails();
-point2.printDetails();
-circle.printDetails();
-rect.printDetails();
-
-polyline.printDetails();
-polyline.addPoint(point3);
-polyline.printDetails();
-
-polygon.getArea();
+ShapeFactory.create('point');
+ShapeFactory.create('circle');
+ShapeFactory.create('rect');
+ShapeFactory.create('polyline');
+ShapeFactory.create('polygon');
 
 Shape.printCount();
