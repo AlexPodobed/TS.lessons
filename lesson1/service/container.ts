@@ -1,20 +1,14 @@
-interface IContainer {
-    getFirst(): any,
-    getLast(): any
-    addFirst(item: any): any,
-    addLast(item: any): any,
-    removeFirst(): any,
-    removeLast(): any,
-    getSize(): number,
-    isEmpty(): boolean,
-    clear(): void,
-}
+import {IContainer} from "../interfaces/interfaces";
 
 class Container implements IContainer {
     private _store: any[];
 
     constructor() {
         this._store = [];
+    }
+
+    static printDivider(): void {
+        console.log(new Array(50).join('*'));
     }
 
     getFirst() {
@@ -44,6 +38,10 @@ class Container implements IContainer {
         return this._store.shift();
     }
 
+    iterate(cb: (item: any) => any) {
+        this._store.map(cb);
+    }
+
     getSize() {
         return this._store.length
     }
@@ -52,15 +50,12 @@ class Container implements IContainer {
         return this.getSize() === 0
     }
 
-    clear() {
+    clear(cb?: any) {
         this._store = [];
+        if (typeof cb === 'function') {
+            cb();
+        }
     }
 }
 
-let container = new Container();
-
-container.addLast(1);
-container.addLast(2);
-container.addLast(3);
-
-console.log(container.getSize());
+export default Container

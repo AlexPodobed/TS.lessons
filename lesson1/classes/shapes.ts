@@ -1,6 +1,5 @@
-abstract class Printable {
-    abstract printDetails(): void;
-}
+import {Printable} from "./base";
+import {IPoint, ICircle, IRect, IPolyline, IPolygon} from "../interfaces/interfaces";
 
 abstract class Shape extends Printable {
     static shapeCounter: number = 0;
@@ -14,10 +13,10 @@ abstract class Shape extends Printable {
         console.info(`Total amount: ${Shape.shapeCounter}`)
     }
 
-}
-interface IPoint {
-    x: number,
-    y: number
+    static resetCounter():void{
+        Shape.shapeCounter = 0;
+    }
+
 }
 
 class Point extends Shape implements IPoint {
@@ -33,12 +32,6 @@ class Point extends Shape implements IPoint {
     printDetails(): void {
         console.log(`I am Point with coors: [${this.x}, ${this.y}]`)
     }
-}
-
-interface ICircle {
-    radius: number,
-    point: IPoint,
-    getArea(): number
 }
 
 class Circle extends Shape implements ICircle {
@@ -61,12 +54,6 @@ class Circle extends Shape implements ICircle {
     }
 }
 
-interface IRect {
-    point1: Point,
-    point2: Point,
-    getArea():number
-}
-
 class Rect extends Shape implements IRect {
     public point1: Point;
     public point2: Point;
@@ -77,7 +64,7 @@ class Rect extends Shape implements IRect {
         this.point2 = point2;
     }
 
-    getArea():number{
+    getArea(): number {
         return (this.point1.x + this.point2.x) * (this.point1.y + this.point2.y)
     }
 
@@ -86,20 +73,15 @@ class Rect extends Shape implements IRect {
     }
 }
 
-interface IPolyline {
-    points: Point[],
-    addPoint(point: Point):void
-}
+class Polyline extends Shape implements IPolyline {
+    public points: Point[];
 
-class Polyline extends Shape implements IPolyline{
-    public points:Point[];
-
-    constructor(...points:Point[]){
+    constructor(...points: Point[]) {
         super();
         this.points = points;
     }
 
-    addPoint(point:Point):void{
+    addPoint(point: Point): void {
         this.points.push(point);
     }
 
@@ -108,28 +90,24 @@ class Polyline extends Shape implements IPolyline{
     }
 }
 
-interface IPolygon{
-    points: Point[]
-}
-
-class Polygon extends Shape implements IPolygon{
+class Polygon extends Shape implements IPolygon {
     public points: Point[];
 
-    constructor(...points:Point[]){
+    constructor(...points: Point[]) {
         super();
         this.points = points;
     }
 
-    getArea():void{
-        let len:number = this.points.length;
-        let sum:number = 0;
-        for(let i = 0; i < len; i++){
+    getArea(): void {
+        let len: number = this.points.length;
+        let sum: number = 0;
+        for (let i = 0; i < len; i++) {
             let point1 = this.points[i];
             let point2 = this.points[((i + 1) !== len ? i + 1 : 0)];
 
-            sum += (point1.x * point2.y - point1.y*point2.x);
+            sum += (point1.x * point2.y - point1.y * point2.x);
         }
-        console.log(sum/2)
+        console.log(sum / 2)
     }
 
     printDetails(): void {
@@ -137,38 +115,4 @@ class Polygon extends Shape implements IPolygon{
     }
 }
 
-
-const ShapeFactory = {
-    get random():number{
-        return Math.floor(Math.random()*10) +1
-    },
-    create(type:string){
-        let instance;
-        switch (type){
-            case "point":
-                instance = new Point(this.random, this.random);
-                break;
-            case "circle":
-                instance = new Circle(this.create('point'), this.random);
-                break;
-            case "rect":
-                instance = new Rect(this.create('point'), this.create('point'));
-                break;
-            case "polyline":
-                instance = new Polyline(this.create('point'), this.create('point'), this.create('point'));
-                break;
-            case "polygon":
-                instance = new Polygon(this.create('point'), this.create('point'), this.create('point'), this.create('point'));
-                break;
-        }
-        return instance;
-    }
-};
-
-ShapeFactory.create('point');
-ShapeFactory.create('circle');
-ShapeFactory.create('rect');
-ShapeFactory.create('polyline');
-ShapeFactory.create('polygon');
-
-Shape.printCount();
+export {Shape, Point, Circle, Rect, Polyline, Polygon}
