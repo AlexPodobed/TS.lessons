@@ -26,13 +26,13 @@ interface IPolygon {
     points: Point[]
 }
 
-interface IContainer {
-    getFirst(): any,
-    getLast(): any
-    addFirst(item: any): any,
-    addLast(item: any): any,
-    removeFirst(): any,
-    removeLast(): any,
+interface IContainer<T> {
+    getFirst(): T,
+    getLast(): T
+    addFirst(item: T): T,
+    addLast(item: T): T,
+    removeFirst(): T,
+    removeLast(): T,
     getSize(): number,
     isEmpty(): boolean,
     clear(cb:any): void,

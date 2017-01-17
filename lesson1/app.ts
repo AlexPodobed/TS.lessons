@@ -2,10 +2,10 @@ import Container from './service/container';
 import ShapeFactory from './service/shapes-factory';
 import {Shape} from './classes/shapes';
 
-const shapeContainer = new Container();
+const shapeContainer = new Container<Shape>();
 
 for(let i = 0; i < 20; i++){
-    let shape = ShapeFactory.create();
+    let shape:Shape = ShapeFactory.create();
     shapeContainer.addLast(shape);
 }
 

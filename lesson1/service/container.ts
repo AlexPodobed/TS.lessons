@@ -1,7 +1,7 @@
 import {IContainer} from "../interfaces/interfaces";
 
-class Container implements IContainer {
-    private _store: any[];
+class Container <T> implements IContainer<T> {
+    private _store: T[];
 
     constructor() {
         this._store = [];
@@ -20,12 +20,12 @@ class Container implements IContainer {
         return size > 0 ? this._store[size - 1] : undefined
     }
 
-    addLast(item: any) {
+    addLast(item: T) {
         this._store.push(item);
         return item;
     }
 
-    addFirst(item: any) {
+    addFirst(item: T) {
         this._store.unshift(item);
         return item;
     }
@@ -38,7 +38,7 @@ class Container implements IContainer {
         return this._store.shift();
     }
 
-    iterate(cb: (item: any) => any) {
+    iterate(cb: (item: T) => void) {
         this._store.map(cb);
     }
 

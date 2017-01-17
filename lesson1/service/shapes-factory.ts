@@ -1,4 +1,4 @@
-import {Point, Circle, Rect, Polyline, Polygon} from "../classes/shapes";
+import {Shape,Point, Circle, Rect, Polyline, Polygon} from "../classes/shapes";
 
 const ShapeFactory = {
     types: ['point', 'circle', 'rect', 'polyline', 'polygon'],
@@ -23,7 +23,7 @@ const ShapeFactory = {
         return arr;
     },
 
-    create(type: string = this.randomType){
+    create(type: string = this.randomType):Shape{
         let instance;
 
         switch (type) {
