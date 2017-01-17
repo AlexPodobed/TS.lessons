@@ -1,6 +1,6 @@
-import Container from './service/container';
-import ShapeFactory from './service/shapes-factory';
+import Container from './classes/container';
 import {Shape} from './classes/shapes';
+import ShapeFactory from './services/shapes-factory';
 
 const shapeContainer = new Container<Shape>();
 
