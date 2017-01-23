@@ -1,6 +1,7 @@
 import Container from './classes/container';
 import {Shape} from './classes/shapes';
 import ShapeFactory from './services/shapes-factory';
+import * as _ from "lodash";
 
 const shapeContainer = new Container<Shape>();
 
@@ -16,3 +17,6 @@ shapeContainer.iterate((shape:any) => shape.printDetails());
 Container.printDivider();
 shapeContainer.clear(Shape.resetCounter);
 Shape.printCount();
+
+
+_.map([1,2,3,4], (item)=>console.log(item));
