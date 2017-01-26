@@ -1,0 +1,31 @@
+{
+  "name": "lesson2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "serve": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/core-js": "^0.9.35",
+    "@types/node": "^7.0.4",
+    "awesome-typescript-loader": "^3.0.0-beta.18",
+    "html-webpack-plugin": "^2.26.0",
+    "typescript": "^2.1.5",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
+  },
+  "dependencies": {
+    "@angular/common": "^2.4.5",
+    "@angular/compiler": "^2.4.5",
+    "@angular/core": "^2.4.5",
+    "@angular/platform-browser": "^2.4.5",
+    "@angular/platform-browser-dynamic": "^2.4.5",
+    "reflect-metadata": "^0.1.9",
+    "rxjs": "^5.0.3",
+    "zone.js": "^0.7.6"
+  }
+}
