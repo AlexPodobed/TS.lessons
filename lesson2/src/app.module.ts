@@ -1,11 +1,27 @@
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
+import HeroChild from './hero/hero-child.component';
+import HeroList from "./hero/hero-list.component";
+import {VersionChild, VersionParent} from "./version/index";
+
+
+
 
 @NgModule({
-    bootstrap: [AppComponent],
-    declarations: [AppComponent],
-    imports: [BrowserModule]
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
+    declarations: [
+        AppComponent,
+        HeroList,
+        HeroChild,
+        VersionChild,
+        VersionParent
+    ],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule{}

@@ -2,13 +2,20 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: "my-app",
-    template: `<h1>Hello {{name}}</h1>`
+    styles: [`
+        h1{color: red}
+    `],
+    template: `
+        <h1>Learning {{name}}</h1>
+        <hero-list></hero-list>
+        <version-parent></version-parent>
+    `
 })
 
 export class AppComponent implements OnInit{
     public name: string;
 
     ngOnInit(){
-      this.name = "world";
+      this.name = "angular";
     }
 }
